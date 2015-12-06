@@ -1,0 +1,228 @@
+
+
+<div>
+
+          <button class="btn btn-danger"  {{ action 'restart'}}>
+          restart
+          </button>
+
+{{#if board.lost}}
+
+<div>
+{{board.winLose}}
+
+
+</div>
+
+{{else}}
+
+
+<table class="table table-bordered">
+
+    <tbody>
+      <tr>
+        {{#each board.line0 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+          {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+
+         </td>
+
+      {{/each}}
+      </tr>
+
+         <tr>
+        {{#each board.line1 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+            {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+
+               <tr>
+        {{#each board.line2 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+            {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+
+               <tr>
+        {{#each board.line3 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+           {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+
+               <tr>
+        {{#each board.line4 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+           {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+
+               <tr>
+        {{#each board.line5 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+           {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+               <tr>
+        {{#each board.line6 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+          {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+               <tr>
+        {{#each board.line7 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+          {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+               <tr>
+        {{#each board.line8 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+           {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+               <tr>
+        {{#each board.line9 as |til|}}
+
+        <td>
+        {{#if til.clear}}
+        <button class="btn btn-primary" {{ action 'pressed' til}}>
+           {{til.numberOfbombs}}
+          </button>
+        {{else}}
+         <button class="btn" {{ action 'pressed' til}}>
+
+          </button>
+
+        {{/if}}
+         </td>
+
+      {{/each}}
+      </tr>
+
+
+    </tbody>
+  </table>
+
+
+
+
+
+
+{{/if}}
+</div>
+
+
+
+
+
+
+
+{{outlet}}
