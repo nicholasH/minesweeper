@@ -20,8 +20,8 @@ export default Ember.Route.extend({
 
                  var tile = this.store.createRecord('tile',{
 
-                                        x:i,
-                                        y:n}
+                                        x:n,
+                                        y:i}
                                         );
            theTiles.addObject(tile);
 
@@ -34,8 +34,8 @@ export default Ember.Route.extend({
 
 
   }
-  
-  
+
+
 
 
 

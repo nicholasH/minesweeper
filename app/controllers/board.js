@@ -43,6 +43,185 @@ tiles: Ember.computed.alias('board.tiles'),
     return til;
   },
 
+
+  getNeighborhood: function(til){
+
+    var neighborhood = [];
+
+    var x = til.get('x');
+    var y = til.get('y');
+
+    var left =(10*(y)) +(x-1);
+
+    var upLeft=(10*(y-1)) +(x-1);
+    var up=(10*(y-1)) +(x);
+    var upRight=(10*(y-1)) +(x+1);
+
+    var right=(10*(y)) +(x+1);
+
+    var downRight=(10*(y+1))+(x+1);
+    var down=(10*(y+1))+(x);
+    var downLeft=(10*(y+1)) +(x-1);
+
+
+      Ember.Logger.log('log value of x & y:', x,y );
+
+        Ember.Logger.log('left',left,' upleft',upLeft,'up',up,'upRight',upRight,'right',right,'downRight',downRight,'down',down,'downLeft',downLeft);
+
+
+
+
+    if(x===0){
+
+      if(y===0){
+
+       neighborhood = [
+
+
+                       this.get('tiles.'+right),// right
+
+                       this.get('tiles.'+downRight),//down right
+                       this.get('tiles.'+down),//down
+
+                      ];
+
+
+
+
+      }
+      else if(y === 9){
+
+
+               neighborhood = [
+
+                       this.get('tiles.'+up),//up
+                       this.get('tiles.'+upRight),//up right
+
+                       this.get('tiles.'+right),// right
+
+
+                      ];
+
+      }
+      else{
+
+
+               neighborhood = [
+
+
+
+                       this.get('tiles.'+up),//up
+                       this.get('tiles.'+upRight),//up right
+
+                       this.get('tiles.'+right),// right
+
+                       this.get('tiles.'+downRight),//down right
+                       this.get('tiles.'+down),//down
+
+                      ];
+      }
+
+    }
+    else if(x===9){
+      if(y === 0){
+               neighborhood = [
+                       this.get('tiles.'+left),//left
+                       this.get('tiles.'+down),//down
+                       this.get('tiles.'+downLeft)//down left
+                      ];
+      }
+      else if(y=== 9){
+
+
+               neighborhood = [
+                       this.get('tiles.'+left),//left
+
+                       this.get('tiles.'+upLeft),//up left
+                       this.get('tiles.'+up),//up
+
+                      ];
+
+      }
+      else{
+
+
+       neighborhood = [
+                       this.get('tiles.'+left),//left
+
+                       this.get('tiles.'+upLeft),//up left
+                       this.get('tiles.'+up),//up
+                       this.get('tiles.'+down),//down
+                       this.get('tiles.'+downLeft)//down left
+                      ];
+      }
+
+    }
+    else if(y===0){
+
+
+             neighborhood = [this.get('tiles.'+left),//left
+
+
+
+                       this.get('tiles.'+right),// right
+
+                       this.get('tiles.'+downRight),//down right
+                       this.get('tiles.'+down),//down
+                       this.get('tiles.'+downLeft)//down left
+                      ];
+    }
+    else if(y===9){
+
+
+
+
+             neighborhood = [this.get('tiles.'+left),//left
+
+                       this.get('tiles.'+upLeft),//up left
+                       this.get('tiles.'+up),//up
+                       this.get('tiles.'+upRight),//up right
+
+                       this.get('tiles.'+right),// right
+
+                      ];
+    }
+    else{
+
+
+
+
+       neighborhood = [
+                       this.get('tiles.'+left),//left
+
+                       this.get('tiles.'+upLeft),//up left
+                       this.get('tiles.'+up),//up
+                       this.get('tiles.'+upRight),//up right
+
+                       this.get('tiles.'+right),// right
+
+                       this.get('tiles.'+downRight),//down right
+                       this.get('tiles.'+down),//down
+                       this.get('tiles.'+downLeft)//down left
+                      ];
+    }
+
+
+
+
+
+
+    return neighborhood;
+
+
+
+
+
+
+
+
+
+  },
+
   setNum: function(){
 
 
@@ -112,44 +291,24 @@ if(tile != null && tile.get('hasBomb')=== false && tile.get('clear') === false  
     this.incrementProperty('board.bTime');
       tile.set('time',this.get('board.bTime'));
   tile.set('clear',true);
+  this.decrementProperty('board.notBombs');
 
     if(tile.get('numberOfbombs')=== 0 ){
 
-
-
       var x = tile.get('x');
       var y = tile.get('y');
-
-
-      Ember.Logger.log('log value ul:', x,y);
-      this.clear(this.getTile(x-1,y-1));
-
-       Ember.Logger.log('log value u:', x,y);
-
-
-
       this.clear(this.getTile(x,y-1));
-
-        Ember.Logger.log('log value ur:', x,y);
-      this.clear(this.getTile(x+1,y-1));
-       Ember.Logger.log('log value r:', x,y);
       this.clear(this.getTile(x+1,y));
-        Ember.Logger.log('log value l:', x,y);
-
       this.clear(this.getTile(x-1,y));
-
-        Ember.Logger.log('log value ld', x,y);
-
-      this.clear(this.getTile(x-1,y+1));
-        Ember.Logger.log('log value d:', x,y);
       this.clear(this.getTile(x,y+1));
-        Ember.Logger.log('log value dr:', x,y);
-      this.clear(this.getTile(x+1,y+1));
+
+       
+
 
 }
   else{
 
-    this.decrementProperty('board.notBombs');
+    
   }
 
 
@@ -193,7 +352,7 @@ if(tile != null && tile.get('hasBomb')=== false && tile.get('clear') === false  
 
           for(var n= this.get('board.bombs');n>0; n--){
 
-            var j = Math.floor(Math.random()*99);
+            var j = Math.floor(Math.random()*99);//make 99 board size -1
 
             var t = this.get('tiles.'+j);
 
@@ -203,14 +362,38 @@ if(tile != null && tile.get('hasBomb')=== false && tile.get('clear') === false  
               }
             else{
 
+
               t.set('hasBomb',true);
+              var neighbor = this.getNeighborhood(t);
+
+               Ember.Logger.log('n L:', neighbor.lenght );
+
+
+
+
+                              Ember.Logger.log('j:',j);
+
+
+              var i = 0;
+              while(typeof neighbor[i] !== 'undefined')// neighbor.length is undefined
+              {
+                 Ember.Logger.log('n L:', neighbor[i].get('x') );
+
+                neighbor[i].incrementProperty('numberOfbombs');
+
+
+                i++;
+
+              }
+
+                Ember.Logger.log('n:', i);
 
 
             }
 
 
           }
-           this.setNum();
+
 
         }
 

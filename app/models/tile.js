@@ -7,9 +7,9 @@ export default DS.Model.extend({
   hasBomb: DS.attr('boolean',{defaultValue: false}),
   x: DS.attr('number'),
   y: DS.attr('number'),
-  
+
   time: DS.attr('number',0),
-  numberOfbombs: DS.attr('number'),
+  numberOfbombs: DS.attr('number',{defaultValue:0}),
   clear: DS.attr('boolean',{defaultValue: false}),
 
 
